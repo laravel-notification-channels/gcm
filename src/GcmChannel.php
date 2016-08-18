@@ -2,6 +2,7 @@
 
 namespace Fruitcake\NotificationChannels\Gcm;
 
+use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
 use Zend\Http\Client\Adapter\Curl;
 use ZendService\Google\Gcm\Client;
@@ -69,7 +70,7 @@ class GcmChannel
             }
 
             app()->make('events')->fire(
-                new Events\NotificationFailed($notifiable, $notification, $this, [
+                new NotificationFailed($notifiable, $notification, $this, [
                     'token' => $token,
                     'error' => $result['error']
                 ])
