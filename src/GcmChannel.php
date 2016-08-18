@@ -30,12 +30,9 @@ class GcmChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        $tokens = $notifiable->routeNotificationFor('gcm');
-        if (!$tokens || count($tokens) == 0) {
+        $tokens = (array) $notifiable->routeNotificationFor('gcm');
+        if (!$tokens) {
             return;
-        }
-        if (!is_array($tokens)) {
-            $tokens = [$tokens];
         }
 
         $message = $notification->toGcm($notifiable);
