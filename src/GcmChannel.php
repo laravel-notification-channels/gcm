@@ -2,32 +2,81 @@
 
 namespace Fruitcake\NotificationChannels\Gcm;
 
-use Fruitcake\NotificationChannels\Gcm\Exceptions\CouldNotSendNotification;
-use Fruitcake\NotificationChannels\Gcm\Events\MessageWasSent;
-use Fruitcake\NotificationChannels\Gcm\Events\SendingMessage;
 use Illuminate\Notifications\Notification;
+use Zend\Http\Client\Adapter\Curl;
+use ZendService\Google\Gcm\Client;
+use ZendService\Google\Gcm\Message as Packet;
 
 class GcmChannel
 {
-    public function __construct()
+    /** @var Client */
+    private $client;
+
+    public function __construct(Client $client)
     {
-        // Initialisation code here
+        $client->setApiKey(config('services.gcm.key'));
+        $client->getHttpClient()->setAdapter(new Curl());
+        $this->client = $client;
     }
 
     /**
-     * Send the given notification.
+     * Send the notification to Google Cloud Messaging
      *
      * @param mixed $notifiable
-     * @param \Illuminate\Notifications\Notification $notification
-     *
-     * @throws Fruitcake\NotificationChannels\Gcm\Exceptions\CouldNotSendNotification
+     * @param Notification $notification
+     * @return void
      */
     public function send($notifiable, Notification $notification)
     {
-        //$response = [a call to the api of your notification send]
+        $tokens = $notifiable->routeNotificationFor('gcm');
+        if (!$tokens || count($tokens) == 0) {
+            return;
+        }
+        if (!is_array($tokens)) {
+            $tokens = [$tokens];
+        }
 
-//        if ($response->error) { // replace this by the code need to check for errors
-//            throw CouldNotSendNotification::serviceRespondedWithAnError($response);
-//        }
+        $message = $notification->toPushNotification($notifiable);
+        if (!$message) {
+            return;
+        }
+
+        // Create GCM Packet
+        $packet = new Packet();
+        $packet->setRegistrationIds($tokens);
+        $packet->setCollapseKey(str_slug($message->title));
+        $packet->setData([
+                'title' => $message->title,
+                'message' => $message->message
+            ] + $message->data);
+
+        try {
+            $response = $this->client->send($packet);
+        } catch(\Exception $e) {
+            // TODO; Should we fire NotificationFailed event here, or throw exception?
+            app('log')->error('Error sending GCM notification to '. $notifiable->name .' (#'. $notifiable->id .') '. $e->getMessage());
+            return;
+        }
+
+        // Return when no errors occurred
+        if($response->getFailureCount() == 0) {
+            return;
+        }
+
+        // Fire event for each failed notification
+        $results = $response->getResults();
+
+        foreach($results as $token => $result) {
+            if(!isset($result['error'])) {
+                continue;
+            }
+
+            app()->make('events')->fire(
+                new Events\NotificationFailed($notifiable, $notification, $this, [
+                    'token' => $token,
+                    'error' => $result['error']
+                ])
+            );
+        }
     }
 }
