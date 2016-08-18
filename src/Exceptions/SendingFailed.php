@@ -5,18 +5,11 @@ namespace Fruitcake\NotificationChannels\Gcm\Exceptions;
 class SendingFailed extends \Exception
 {
     /**
-     * @var \Exception
-     */
-    public $original;
-
-    /**
-     * @param \Exception $original
+     * @param \Exception $e
      * @return SendingFailed
      */
-    public static function create($original)
+    public static function create(\Exception $e)
     {
-        $exception = new static("Cannot send message to Gcm: ". $original->getMessage());
-        $exception->original = $original;
-        return $exception;
+        return new static("Cannot send message to Gcm: " . $e->getMessage(), 0, $e);
     }
 }
