@@ -2,8 +2,11 @@
 
 namespace Fruitcake\NotificationChannels\Gcm;
 
-class PushMessage
+class GcmMessage
 {
+
+    const PRIORITY_NORMAL = 'normal';
+    const PRIORITY_HIGH = 'high';
 
     /**
      * The title of the notification.
@@ -21,10 +24,19 @@ class PushMessage
 
     /**
      * The badge of the notification.
+     * @warning UNUSED
      *
      * @var integer
      */
     public $badge;
+
+    /**
+     * The priority of the notification.
+     * @warning UNUSED
+     *
+     * @var string
+     */
+    public $priority = self::PRIORITY_NORMAL;
 
     /**
      * Additional data of the notification.
@@ -69,6 +81,19 @@ class PushMessage
     public function badge($badge)
     {
         $this->badge = $badge;
+
+        return $this;
+    }
+
+    /**
+     * Set the priority of the notification.
+     *
+     * @param string $priority
+     * @return $this
+     */
+    public function priority($priority)
+    {
+        $this->priority = $priority;
 
         return $this;
     }

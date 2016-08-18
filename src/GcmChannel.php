@@ -36,7 +36,7 @@ class GcmChannel
             $tokens = [$tokens];
         }
 
-        $message = $notification->toPushNotification($notifiable);
+        $message = $notification->toGcm($notifiable);
         if (!$message) {
             return;
         }
