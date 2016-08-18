@@ -25,6 +25,8 @@ class GcmChannel
      * @param mixed $notifiable
      * @param Notification $notification
      * @return void
+     *
+     * @throws Exceptions\SendingFailed
      */
     public function send($notifiable, Notification $notification)
     {
@@ -53,9 +55,7 @@ class GcmChannel
         try {
             $response = $this->client->send($packet);
         } catch(\Exception $e) {
-            // TODO; Should we fire NotificationFailed event here, or throw exception?
-            app('log')->error('Error sending GCM notification to '. $notifiable->name .' (#'. $notifiable->id .') '. $e->getMessage());
-            return;
+            throw Exceptions\SendingFailed::create($e);
         }
 
         // Return when no errors occurred
