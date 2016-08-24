@@ -1,23 +1,31 @@
 <?php
 
-namespace Fruitcake\NotificationChannels\Gcm;
+namespace NotificationChannels\Gcm;
 
+use Illuminate\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
-use Zend\Http\Client\Adapter\Curl;
 use ZendService\Google\Gcm\Client;
 use ZendService\Google\Gcm\Message as Packet;
 
 class GcmChannel
 {
     /** @var Client */
-    private $client;
+    protected $client;
 
-    public function __construct(Client $client)
+    /** @var  Dispatcher */
+    protected $events;
+
+    /**
+     * GcmChannel constructor.
+     *
+     * @param Client $client
+     * @param Dispatcher $events
+     */
+    public function __construct(Client $client, Dispatcher $events)
     {
-        $client->setApiKey(config('services.gcm.key'));
-        $client->getHttpClient()->setAdapter(new Curl());
         $this->client = $client;
+        $this->events = $events;
     }
 
     /**
@@ -69,7 +77,7 @@ class GcmChannel
                 continue;
             }
 
-            app()->make('events')->fire(
+            $this->events->fire(
                 new NotificationFailed($notifiable, $notification, $this, [
                     'token' => $token,
                     'error' => $result['error']

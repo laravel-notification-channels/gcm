@@ -1,6 +1,6 @@
 <?php
 
-namespace Fruitcake\NotificationChannels\Gcm\Exceptions;
+namespace NotificationChannels\Gcm\Exceptions;
 
 class SendingFailed extends \Exception
 {

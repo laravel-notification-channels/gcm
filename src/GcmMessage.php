@@ -1,10 +1,9 @@
 <?php
 
-namespace Fruitcake\NotificationChannels\Gcm;
+namespace NotificationChannels\Gcm;
 
 class GcmMessage
 {
-
     const PRIORITY_NORMAL = 'normal';
     const PRIORITY_HIGH = 'high';
 
@@ -45,6 +44,34 @@ class GcmMessage
      */
     public $data = [];
 
+    /**
+     * GcmMessage constructor.
+     * @param string|null $title
+     * @param string|null $message
+     * @param array $data
+     * @param string $priority
+     */
+    public function __construct($title = null, $message = null, $data = [], $priority = self::PRIORITY_NORMAL)
+    {
+        $this->title = $title;
+        $this->message = $message;
+        $this->data = $data;
+        $this->priority = $priority;
+    }
+
+    /**
+     * GcmMessage factory.
+     *
+     * @param string|null $title
+     * @param string|null $message
+     * @param array $data
+     * @param string $priority
+     * @return static
+     */
+    public static function create($title = null, $message = null, $data = [], $priority = self::PRIORITY_NORMAL)
+    {
+        return new static($title, $message, $data, $priority);
+    }
 
     /**
      * Set the title of the notification.
