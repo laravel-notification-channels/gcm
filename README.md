@@ -1,12 +1,8 @@
-## Laravel GCM (Android Push) Notification Channel
-
-### Work in Progress
+## Laravel GCM (Google Cloud Messaging)) Notification Channel
 
 Here's the latest documentation on Laravel 5.3 Notifications System: 
 
 https://laravel.com/docs/master/notifications
-
-# A Boilerplate repo for contributions
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/gcm.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/gcm)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -17,10 +13,9 @@ https://laravel.com/docs/master/notifications
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/gcm/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/gcm/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/gcm.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/gcm)
 
-This package makes it easy to send notifications using Android Push (GCM) with Laravel 5.3.
+This package makes it easy to send notifications using Google Cloud Messaging (GCM) with Laravel 5.3.
 
-This is where your description should go. Add a little code example so build can understand real quick how the package can be used. Try and limit it to a paragraph or two.
-
+This package is based on [ZendService\Google\Gcm](https://framework.zend.com/manual/2.4/en/modules/zendservice.google.gcm.html), so please read that documentation for more information.
 
 
 ## Contents
@@ -39,19 +34,71 @@ This is where your description should go. Add a little code example so build can
 
 ## Installation
 
-Please also include the steps for any third-party service setup that's required for this package.
+Install this package with Composer:
+
+    composer require laravel-notification-channels/gcm
+    
+Register the ServiceProvider in your config/app.php:
+
+    NotificationChannels\Gcm\GcmServiceProvider::class,
 
 ### Setting up the GCM service
 
-Optionally include a few steps how users can set up the service.
+You need to register for a server key for Google Cloud Messaging for your App in the Google API Console: https://console.cloud.google.com/apis/
+
+Add the API key to your configuration in config/broadcasting.php
+
+    'connections' => [
+      ....
+      'gcm' => [
+          'key' => env('GCM_KEY'),
+      ],
+      ...
+    ]
 
 ## Usage
 
-Some code examples, make it clear how to use the package
+You can now send messages to GCM by creating a GcmMessage:
+
+```php
+use NotificationChannels\Gcm\GcmChannel;
+use NotificationChannels\Gcm\GcmMessage;
+use Illuminate\Notifications\Notification;
+
+class AccountApproved extends Notification
+{
+    public function via($notifiable)
+    {
+        return [GcmChannel::class];
+    }
+
+    public function toGcmNotification($notifiable)
+    {
+        return GcmMessage::create()
+            ->badge(1)
+            ->title('Account approved')
+            ->message("Your {$notifiable->service} account was approved!");
+    }
+}
+```
+
+In your `notifiable` model, make sure to include a `routeNotificationForGcm()` method, which return one or an array of tokens.
+
+```php
+public function routeNotificationForGcm()
+{
+    return $this->gcm_token;
+}
+```
 
 ### Available methods
 
-A list of all available options
+ - title($str)
+ - message($str)
+ - badge($integer)
+ - priorty(`GcmMessage::PRIORITY_NORMAL` or `GcmMessage::PRIORITY_HIGH`)
+ - data($key, $mixed)
+ - action($action, $params) (Will set an `action` data key)
 
 ## Changelog
 
