@@ -1,4 +1,5 @@
 <?php
+
 namespace NotificationChannels\Gcm\Test;
 
 class Notifiable

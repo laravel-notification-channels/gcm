@@ -57,7 +57,6 @@ class GcmMessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $this->message->data['foo']);
     }
 
-
     /** @test */
     public function it_has_default_priority()
     {

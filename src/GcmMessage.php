@@ -25,7 +25,7 @@ class GcmMessage
      * The badge of the notification.
      * @warning UNUSED
      *
-     * @var integer
+     * @var int
      */
     public $badge;
 
@@ -101,7 +101,7 @@ class GcmMessage
     /**
      * Set the badge of the notification.
      *
-     * @param integer $badge
+     * @param int $badge
      *
      * @return $this
      */
@@ -155,7 +155,7 @@ class GcmMessage
     }
 
     /**
-     * Add an action to the notification
+     * Add an action to the notification.
      *
      * @param string $action
      * @param mixed $params
@@ -166,8 +166,7 @@ class GcmMessage
     {
         return $this->data('action', [
             'action' => $action,
-            'params' => $params
+            'params' => $params,
         ]);
     }
-
 }
