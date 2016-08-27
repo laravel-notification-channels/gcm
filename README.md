@@ -1,4 +1,4 @@
-## Laravel GCM (Google Cloud Messaging)) Notification Channel
+## Laravel GCM (Google Cloud Messaging) Notification Channel
 
 Here's the latest documentation on Laravel 5.3 Notifications System: 
 
