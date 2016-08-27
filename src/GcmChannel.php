@@ -2,9 +2,11 @@
 
 namespace NotificationChannels\Gcm;
 
+use Exception;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\Gcm\Exceptions\SendingFailed;
 use ZendService\Google\Gcm\Client;
 use ZendService\Google\Gcm\Message as Packet;
 
@@ -13,12 +15,10 @@ class GcmChannel
     /** @var Client */
     protected $client;
 
-    /** @var  Dispatcher */
+    /** @var Dispatcher */
     protected $events;
 
     /**
-     * GcmChannel constructor.
-     *
      * @param Client $client
      * @param Dispatcher $events
      */
@@ -49,8 +49,29 @@ class GcmChannel
             return;
         }
 
-        // Create GCM Packet
+        $packet = $this->getPacket($tokens, $message);
+
+        try {
+            $response = $this->client->send($packet);
+        } catch(Exception $exception) {
+            throw SendingFailed::create($exception);
+        }
+
+        if(! $response->getFailureCount() == 0) {
+            $this->handleFailedNotifications($notifiable, $notification, $response);
+        }
+    }
+
+    /**
+     * @param $tokens
+     * @param $message
+     *
+     * @return \NotificationChannels\Gcm\Packet
+     */
+    protected function getPacket($tokens, $message)
+    {
         $packet = new Packet();
+
         $packet->setRegistrationIds($tokens);
         $packet->setCollapseKey(str_slug($message->title));
         $packet->setData([
@@ -58,22 +79,20 @@ class GcmChannel
                 'message' => $message->message
             ] + $message->data);
 
-        try {
-            $response = $this->client->send($packet);
-        } catch(\Exception $e) {
-            throw Exceptions\SendingFailed::create($e);
-        }
+        return $packet;
+    }
 
-        // Return when no errors occurred
-        if($response->getFailureCount() == 0) {
-            return;
-        }
-
-        // Fire event for each failed notification
+    /**
+     * @param $notifiable
+     * @param \Illuminate\Notifications\Notification $notification
+     * @param $response
+     */
+    protected function handleFailedNotifications($notifiable, Notification $notification, $response)
+    {
         $results = $response->getResults();
 
-        foreach($results as $token => $result) {
-            if(!isset($result['error'])) {
+        foreach ($results as $token => $result) {
+            if (!isset($result['error'])) {
                 continue;
             }
 

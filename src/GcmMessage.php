@@ -31,7 +31,6 @@ class GcmMessage
 
     /**
      * The priority of the notification.
-     * @warning UNUSED
      *
      * @var string
      */
@@ -45,7 +44,19 @@ class GcmMessage
     public $data = [];
 
     /**
-     * GcmMessage constructor.
+     * @param string|null $title
+     * @param string|null $message
+     * @param array $data
+     * @param string $priority
+     *
+     * @return static
+     */
+    public static function create($title = null, $message = null, $data = [], $priority = self::PRIORITY_NORMAL)
+    {
+        return new static($title, $message, $data, $priority);
+    }
+
+    /**
      * @param string|null $title
      * @param string|null $message
      * @param array $data
@@ -60,23 +71,10 @@ class GcmMessage
     }
 
     /**
-     * GcmMessage factory.
-     *
-     * @param string|null $title
-     * @param string|null $message
-     * @param array $data
-     * @param string $priority
-     * @return static
-     */
-    public static function create($title = null, $message = null, $data = [], $priority = self::PRIORITY_NORMAL)
-    {
-        return new static($title, $message, $data, $priority);
-    }
-
-    /**
      * Set the title of the notification.
      *
      * @param string $title
+     *
      * @return $this
      */
     public function title($title)
@@ -90,6 +88,7 @@ class GcmMessage
      * Set the message of the notification.
      *
      * @param string $message
+     *
      * @return $this
      */
     public function message($message)
@@ -103,6 +102,7 @@ class GcmMessage
      * Set the badge of the notification.
      *
      * @param integer $badge
+     *
      * @return $this
      */
     public function badge($badge)
@@ -116,6 +116,7 @@ class GcmMessage
      * Set the priority of the notification.
      *
      * @param string $priority
+     *
      * @return $this
      */
     public function priority($priority)
@@ -130,6 +131,7 @@ class GcmMessage
      *
      * @param string $key
      * @param mixed $value
+     *
      * @return $this
      */
     public function data($key, $value)
@@ -157,6 +159,7 @@ class GcmMessage
      *
      * @param string $action
      * @param mixed $params
+     *
      * @return $this
      */
     public function action($action, $params = null)

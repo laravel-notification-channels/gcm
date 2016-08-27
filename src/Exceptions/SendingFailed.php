@@ -2,14 +2,17 @@
 
 namespace NotificationChannels\Gcm\Exceptions;
 
-class SendingFailed extends \Exception
+use Exception;
+
+class SendingFailed extends Exception
 {
     /**
-     * @param \Exception $e
+     * @param Exception $exception
+     *
      * @return SendingFailed
      */
-    public static function create(\Exception $e)
+    public static function create(Exception $exception)
     {
-        return new static("Cannot send message to Gcm: " . $e->getMessage(), 0, $e);
+        return new static("Cannot send message to Gcm: {$exception->getMessage()}", 0, $exception);
     }
 }
