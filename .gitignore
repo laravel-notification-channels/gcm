@@ -1,5 +1,4 @@
 /vendor
-/.idea
 build
 composer.phar
 composer.lock
