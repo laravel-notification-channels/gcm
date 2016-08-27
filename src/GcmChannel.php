@@ -29,7 +29,7 @@ class GcmChannel
     }
 
     /**
-     * Send the notification to Google Cloud Messaging
+     * Send the notification to Google Cloud Messaging.
      *
      * @param mixed $notifiable
      * @param Notification $notification
@@ -40,12 +40,12 @@ class GcmChannel
     public function send($notifiable, Notification $notification)
     {
         $tokens = (array) $notifiable->routeNotificationFor('gcm');
-        if (!$tokens) {
+        if (! $tokens) {
             return;
         }
 
         $message = $notification->toGcm($notifiable);
-        if (!$message) {
+        if (! $message) {
             return;
         }
 
@@ -53,11 +53,11 @@ class GcmChannel
 
         try {
             $response = $this->client->send($packet);
-        } catch(Exception $exception) {
+        } catch (Exception $exception) {
             throw SendingFailed::create($exception);
         }
 
-        if(! $response->getFailureCount() == 0) {
+        if (! $response->getFailureCount() == 0) {
             $this->handleFailedNotifications($notifiable, $notification, $response);
         }
     }
@@ -76,7 +76,7 @@ class GcmChannel
         $packet->setCollapseKey(str_slug($message->title));
         $packet->setData([
                 'title' => $message->title,
-                'message' => $message->message
+                'message' => $message->message,
             ] + $message->data);
 
         return $packet;
@@ -92,14 +92,14 @@ class GcmChannel
         $results = $response->getResults();
 
         foreach ($results as $token => $result) {
-            if (!isset($result['error'])) {
+            if (! isset($result['error'])) {
                 continue;
             }
 
             $this->events->fire(
                 new NotificationFailed($notifiable, $notification, $this, [
                     'token' => $token,
-                    'error' => $result['error']
+                    'error' => $result['error'],
                 ])
             );
         }

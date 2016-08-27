@@ -1,8 +1,8 @@
 <?php
+
 namespace NotificationChannels\Gcm\Test;
 
 use Illuminate\Events\Dispatcher;
-use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notifiable;
 use NotificationChannels\Gcm\GcmChannel;
 use Illuminate\Notifications\Notification;
@@ -23,7 +23,7 @@ class ChannelTest extends PHPUnit_Framework_TestCase
      */
     protected $events;
 
-    /** @var  Notification */
+    /** @var Notification */
     protected $notification;
 
     public function setUp()
@@ -52,12 +52,10 @@ class ChannelTest extends PHPUnit_Framework_TestCase
 
         $this->channel->send($this->notifiable, $this->notification);
     }
-
 }
 class TestNotifiable
 {
     use Notifiable;
-
 }
 class TestNotification extends Notification
 {
