@@ -1,9 +1,5 @@
 # Laravel GCM (Google Cloud Messaging) Notification Channel
 
-Here's the latest documentation on Laravel 5.3 Notifications System: 
-
-https://laravel.com/docs/master/notifications
-
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/gcm.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/gcm)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/laravel-notification-channels/gcm/master.svg?style=flat-square)](https://travis-ci.org/laravel-notification-channels/gcm)
