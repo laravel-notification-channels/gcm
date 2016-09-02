@@ -68,7 +68,7 @@ class AccountApproved extends Notification
         return [GcmChannel::class];
     }
 
-    public function toGcmNotification($notifiable)
+    public function toGcm($notifiable)
     {
         return GcmMessage::create()
             ->badge(1)
