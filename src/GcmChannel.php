@@ -73,10 +73,11 @@ class GcmChannel
         $packet = new Packet();
 
         $packet->setRegistrationIds($tokens);
+        $packet->setPriority($message->priority);
         $packet->setCollapseKey(str_slug($message->title));
-        $packet->setData([
+        $packet->setNotification([
                 'title' => $message->title,
-                'message' => $message->message,
+                'body' => $message->message,
             ] + $message->data);
 
         return $packet;
