@@ -13,7 +13,7 @@ class Packet extends Message
     protected $notification;
 
     /**
-     * Set the notification
+     * Set the notification.
      *
      * @param array $ids
      * @return Message
@@ -33,7 +33,7 @@ class Packet extends Message
      */
     public function toJson()
     {
-        $json = array();
+        $json = [];
         if ($this->registrationIds) {
             $json['registration_ids'] = $this->registrationIds;
         }
