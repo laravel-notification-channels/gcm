@@ -21,6 +21,7 @@ class Packet extends Message
     public function setNotification($notification)
     {
         $this->notification = $notification;
+
         return $this;
     }
 

@@ -79,7 +79,7 @@ class GcmChannel
             ] + $message->data);
         $packet->setNotification([
                 'title' => $message->title,
-                'message' => $message->message,
+                'body' => $message->message,
             ] + $message->data);
 
         return $packet;
