@@ -6,6 +6,8 @@ class GcmMessage
 {
     const PRIORITY_NORMAL = 'normal';
     const PRIORITY_HIGH = 'high';
+    const ANDROID = 'android';
+    const IOS = 'ios';
 
     /**
      * The title of the notification.
@@ -42,6 +44,13 @@ class GcmMessage
      * @var array
      */
     public $data = [];
+
+    /**
+     * Set the 'OS' to send the notification
+     *
+     * @var string
+     */
+    public $os = self::ANDROID;
 
     /**
      * @param string|null $title
@@ -168,5 +177,19 @@ class GcmMessage
             'action' => $action,
             'params' => $params,
         ]);
+    }
+
+    /**
+     * Set the OS to send the notification
+     *
+     * @param string $os
+     *
+     * @return $this
+     */
+    public function os($os)
+    {
+        $this->os = $os;
+
+        return $this;
     }
 }

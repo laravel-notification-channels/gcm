@@ -87,6 +87,31 @@ public function routeNotificationForGcm()
 }
 ```
 
+You can also send GCM messages to iOS devices. For this, you just need to specify the OS you want to send:
+
+```php
+use NotificationChannels\Gcm\GcmChannel;
+use NotificationChannels\Gcm\GcmMessage;
+use Illuminate\Notifications\Notification;
+
+class AccountApproved extends Notification
+{
+    public function via($notifiable)
+    {
+        return [GcmChannel::class];
+    }
+
+    public function toGcm($notifiable)
+    {
+        return GcmMessage::create()
+            ->badge(1)
+            ->title('Account approved')
+            ->message("Your {$notifiable->service} account was approved!")
+            ->os(GcmMessage::IOS);
+    }
+}
+```
+
 ### Available methods
 
  - title($str)
