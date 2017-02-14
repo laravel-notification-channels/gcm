@@ -4,10 +4,10 @@ namespace NotificationChannels\Gcm;
 
 use Exception;
 use Illuminate\Events\Dispatcher;
-use Illuminate\Notifications\Events\NotificationFailed;
+use ZendService\Google\Gcm\Client;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Gcm\Exceptions\SendingFailed;
-use ZendService\Google\Gcm\Client;
+use Illuminate\Notifications\Events\NotificationFailed;
 
 class GcmChannel
 {
@@ -73,14 +73,18 @@ class GcmChannel
 
         $packet->setRegistrationIds($tokens);
         $packet->setCollapseKey(str_slug($message->title));
+
         $packet->setData([
-                'title' => $message->title,
-                'message' => $message->message,
-            ] + $message->data);
-        $packet->setNotification([
+            'title' => $message->title,
+            'message' => $message->message,
+        ] + $message->data);
+
+        if ($message->isIOS()) {
+            $packet->setNotification([
                 'title' => $message->title,
                 'body' => $message->message,
-            ] + $message->data);
+            ]);
+        }
 
         return $packet;
     }
