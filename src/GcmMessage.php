@@ -46,7 +46,7 @@ class GcmMessage
     public $data = [];
 
     /**
-     * Set the 'OS' to send the notification
+     * Set the 'OS' to send the notification.
      *
      * @var string
      */
@@ -180,7 +180,7 @@ class GcmMessage
     }
 
     /**
-     * Set the OS to send the notification
+     * Set the OS to send the notification.
      *
      * @param string $os
      *
@@ -196,7 +196,7 @@ class GcmMessage
     /**
      * Check if the current os is Android.
      *
-     * @return boolean
+     * @return bool
      */
     public function isAndroid()
     {
@@ -206,7 +206,7 @@ class GcmMessage
     /**
      * Check if the current os is IOS.
      *
-     * @return boolean
+     * @return bool
      */
     public function isIOS()
     {

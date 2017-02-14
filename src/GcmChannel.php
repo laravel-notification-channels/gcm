@@ -4,10 +4,10 @@ namespace NotificationChannels\Gcm;
 
 use Exception;
 use Illuminate\Events\Dispatcher;
-use Illuminate\Notifications\Events\NotificationFailed;
+use ZendService\Google\Gcm\Client;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Gcm\Exceptions\SendingFailed;
-use ZendService\Google\Gcm\Client;
+use Illuminate\Notifications\Events\NotificationFailed;
 
 class GcmChannel
 {
