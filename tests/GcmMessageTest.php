@@ -71,9 +71,18 @@ class GcmMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function it_can_set_the_os()
+    public function it_can_set_the_os_to_android()
+    {
+        $this->message->os(GcmMessage::ANDROID);
+        $this->assertEquals(GcmMessage::ANDROID, $this->message->os);
+        $this->assertTrue($this->message->isAndroid());
+    }
+
+    /** @test */
+    public function it_can_set_the_os_to_ios()
     {
         $this->message->os(GcmMessage::IOS);
         $this->assertEquals(GcmMessage::IOS, $this->message->os);
+        $this->assertTrue($this->message->isIOS());
     }
 }

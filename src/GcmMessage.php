@@ -192,4 +192,24 @@ class GcmMessage
 
         return $this;
     }
+
+    /**
+     * Check if the current os is Android.
+     *
+     * @return boolean
+     */
+    public function isAndroid()
+    {
+        return $this->os === self::ANDROID;
+    }
+
+    /**
+     * Check if the current os is IOS.
+     *
+     * @return boolean
+     */
+    public function isIOS()
+    {
+        return $this->os === self::IOS;
+    }
 }
