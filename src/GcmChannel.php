@@ -74,18 +74,16 @@ class GcmChannel
         $packet->setRegistrationIds($tokens);
         $packet->setCollapseKey(str_slug($message->title));
 
-        if ($message->isAndroid()) {
-            $packet->setData([
-                'title' => $message->title,
-                'message' => $message->message,
-            ] + $message->data);
-        }
+        $packet->setData([
+            'title' => $message->title,
+            'message' => $message->message,
+        ] + $message->data);
 
         if ($message->isIOS()) {
             $packet->setNotification([
                 'title' => $message->title,
                 'body' => $message->message,
-            ] + $message->data);
+            ]);
         }
 
         return $packet;
