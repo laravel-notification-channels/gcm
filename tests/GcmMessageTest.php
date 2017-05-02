@@ -81,7 +81,7 @@ class GcmMessageTest extends \PHPUnit_Framework_TestCase
 	/** @test */
 	public function it_can_set_the_sound()
 	{
-		$this->message->priority(GcmMessage::DEFAULT_SOUND);
+		$this->message->sound(GcmMessage::DEFAULT_SOUND);
 		$this->assertEquals(GcmMessage::DEFAULT_SOUND, $this->message->sound);
 	}
 }
