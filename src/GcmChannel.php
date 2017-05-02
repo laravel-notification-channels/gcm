@@ -8,7 +8,6 @@ use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Gcm\Exceptions\SendingFailed;
 use ZendService\Google\Gcm\Client;
-use ZendService\Google\Gcm\Message as Packet;
 
 class GcmChannel
 {
@@ -77,6 +76,10 @@ class GcmChannel
         $packet->setData([
                 'title' => $message->title,
                 'message' => $message->message,
+            ] + $message->data);
+        $packet->setNotification([
+                'title' => $message->title,
+                'body' => $message->message,
             ] + $message->data);
 
         return $packet;
