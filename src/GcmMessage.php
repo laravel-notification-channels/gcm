@@ -38,12 +38,12 @@ class GcmMessage
      */
     public $priority = self::PRIORITY_NORMAL;
 
-	/**
-	 * Notification sound
-	 *
-	 * @var string
-	 */
-	public $sound = self::DEFAULT_SOUND;
+    /**
+     * Notification sound
+     *
+     * @var string
+     */
+    public $sound = self::DEFAULT_SOUND;
 
     /**
      * Additional data of the notification.
@@ -70,7 +70,7 @@ class GcmMessage
      * @param string|null $message
      * @param array $data
      * @param string $priority
-	 * @param string $sound
+     * @param string $sound
      */
     public function __construct($title = null, $message = null, $data = [], $priority = self::PRIORITY_NORMAL, $sound = self::DEFAULT_SOUND)
     {
@@ -137,19 +137,19 @@ class GcmMessage
         return $this;
     }
 
-	/**
-	 * Set the sound for notification
-	 *
-	 * @param string $sound
-	 *
-	 * @return $this
-	 */
-	public function sound($sound)
-	{
-		$this->sound = $sound;
+    /**
+     * Set the sound for notification
+     *
+     * @param string $sound
+     *
+     * @return $this
+     */
+    public function sound($sound)
+    {
+        $this->sound = $sound;
 
-		return $this;
-	}
+        return $this;
+    }
 
     /**
      * Add data to the notification.

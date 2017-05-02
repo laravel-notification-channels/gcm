@@ -72,16 +72,16 @@ class GcmMessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(GcmMessage::PRIORITY_HIGH, $this->message->priority);
     }
 
-	/** @test */
-	public function it_has_default_sound()
-	{
-		$this->assertEquals(GcmMessage::DEFAULT_SOUND, $this->message->sound);
-	}
+    /** @test */
+    public function it_has_default_sound()
+    {
+        $this->assertEquals(GcmMessage::DEFAULT_SOUND, $this->message->sound);
+    }
 
-	/** @test */
-	public function it_can_set_the_sound()
-	{
-		$this->message->sound(GcmMessage::DEFAULT_SOUND);
-		$this->assertEquals(GcmMessage::DEFAULT_SOUND, $this->message->sound);
-	}
+    /** @test */
+    public function it_can_set_the_sound()
+    {
+        $this->message->sound(GcmMessage::DEFAULT_SOUND);
+        $this->assertEquals(GcmMessage::DEFAULT_SOUND, $this->message->sound);
+    }
 }
