@@ -7,6 +7,8 @@ class GcmMessage
     const PRIORITY_NORMAL = 'normal';
     const PRIORITY_HIGH = 'high';
 
+    const DEFAULT_SOUND = 'default';
+
     /**
      * The title of the notification.
      *
@@ -36,6 +38,13 @@ class GcmMessage
      */
     public $priority = self::PRIORITY_NORMAL;
 
+	/**
+	 * Notification sound
+	 *
+	 * @var string
+	 */
+	public $sound = self::DEFAULT_SOUND;
+
     /**
      * Additional data of the notification.
      *
@@ -51,9 +60,9 @@ class GcmMessage
      *
      * @return static
      */
-    public static function create($title = null, $message = null, $data = [], $priority = self::PRIORITY_NORMAL)
+    public static function create($title = null, $message = null, $data = [], $priority = self::PRIORITY_NORMAL, $sound = self::DEFAULT_SOUND)
     {
-        return new static($title, $message, $data, $priority);
+        return new static($title, $message, $data, $priority, $sound);
     }
 
     /**
@@ -61,13 +70,15 @@ class GcmMessage
      * @param string|null $message
      * @param array $data
      * @param string $priority
+	 * @param string $sound
      */
-    public function __construct($title = null, $message = null, $data = [], $priority = self::PRIORITY_NORMAL)
+    public function __construct($title = null, $message = null, $data = [], $priority = self::PRIORITY_NORMAL, $sound = self::DEFAULT_SOUND)
     {
         $this->title = $title;
         $this->message = $message;
         $this->data = $data;
         $this->priority = $priority;
+        $this->sound = $sound;
     }
 
     /**
@@ -125,6 +136,20 @@ class GcmMessage
 
         return $this;
     }
+
+	/**
+	 * Set the sound for notification
+	 *
+	 * @param string $sound
+	 *
+	 * @return $this
+	 */
+	public function sound($sound)
+	{
+		$this->sound = $sound;
+
+		return $this;
+	}
 
     /**
      * Add data to the notification.

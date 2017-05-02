@@ -19,21 +19,23 @@ class GcmMessageTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function it_can_accept_parameters_when_constructing_a_message()
     {
-        $message = new GcmMessage('myTitle', 'myMessage', ['foo' => 'bar'], GcmMessage::PRIORITY_HIGH);
+        $message = new GcmMessage('myTitle', 'myMessage', ['foo' => 'bar'], GcmMessage::PRIORITY_HIGH, GcmMessage::DEFAULT_SOUND);
         $this->assertEquals('myTitle', $message->title);
         $this->assertEquals('myMessage', $message->message);
         $this->assertEquals('bar', $message->data['foo']);
         $this->assertEquals(GcmMessage::PRIORITY_HIGH, $message->priority);
+		$this->assertEquals(GcmMessage::DEFAULT_SOUND, $message->sound);
     }
 
     /** @test */
     public function it_provides_a_create_method()
     {
-        $message = GcmMessage::create('myTitle', 'myMessage', ['foo' => 'bar'], GcmMessage::PRIORITY_HIGH);
+        $message = GcmMessage::create('myTitle', 'myMessage', ['foo' => 'bar'], GcmMessage::PRIORITY_HIGH, GcmMessage::DEFAULT_SOUND);
         $this->assertEquals('myTitle', $message->title);
         $this->assertEquals('myMessage', $message->message);
         $this->assertEquals('bar', $message->data['foo']);
         $this->assertEquals(GcmMessage::PRIORITY_HIGH, $message->priority);
+		$this->assertEquals(GcmMessage::DEFAULT_SOUND, $message->sound);
     }
 
     /** @test */
@@ -69,4 +71,17 @@ class GcmMessageTest extends \PHPUnit_Framework_TestCase
         $this->message->priority(GcmMessage::PRIORITY_HIGH);
         $this->assertEquals(GcmMessage::PRIORITY_HIGH, $this->message->priority);
     }
+
+	/** @test */
+	public function it_has_default_sound()
+	{
+		$this->assertEquals(GcmMessage::DEFAULT_SOUND, $this->message->sound);
+	}
+
+	/** @test */
+	public function it_can_set_the_sound()
+	{
+		$this->message->priority(GcmMessage::DEFAULT_SOUND);
+		$this->assertEquals(GcmMessage::DEFAULT_SOUND, $this->message->sound);
+	}
 }
