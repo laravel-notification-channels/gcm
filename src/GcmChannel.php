@@ -80,6 +80,7 @@ class GcmChannel
         $packet->setNotification([
                 'title' => $message->title,
                 'body' => $message->message,
+                'sound' => $message->sound,
             ] + $message->data);
 
         return $packet;
@@ -100,7 +101,7 @@ class GcmChannel
             }
 
             $this->events->fire(
-                new NotificationFailed($notifiable, $notification, $this, [
+                new NotificationFailed($notifiable, $notification, get_class($this), [
                     'token' => $token,
                     'error' => $result['error'],
                 ])
