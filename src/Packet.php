@@ -15,10 +15,10 @@ class Packet extends Message
     /**
      * Set the notification.
      *
-     * @param array $ids
+     * @param array $notification
      * @return Message
      */
-    public function setNotification($notification)
+    public function setNotification(array $notification)
     {
         $this->notification = $notification;
 

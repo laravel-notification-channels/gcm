@@ -16,7 +16,7 @@
         "illuminate/notifications": "^5.3",
         "illuminate/queue": "^5.1|^5.2|^5.3",
         "illuminate/support": "^5.1|^5.2|^5.3",
-        "zendframework/zendservice-google-gcm": "^1.0"
+        "zendframework/zendservice-google-gcm": "^2.0"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.5",
