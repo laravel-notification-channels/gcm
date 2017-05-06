@@ -2,8 +2,8 @@
 
 namespace NotificationChannels\Gcm;
 
-use ZendService\Google\Gcm\Message;
 use Zend\Json\Json;
+use ZendService\Google\Gcm\Message;
 
 class Packet extends Message
 {
