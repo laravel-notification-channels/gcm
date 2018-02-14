@@ -1,10 +1,10 @@
 <?php
 
-namespace Fruitcake\NotificationChannels\Gcm\Test;
+namespace NotificationChannels\Gcm\Tests;
 
 use NotificationChannels\Gcm\GcmMessage;
 
-class GcmMessageTest extends \PHPUnit_Framework_TestCase
+class GcmMessageTest extends TestCase
 {
     /** @var GcmMessage */
     protected $message;
