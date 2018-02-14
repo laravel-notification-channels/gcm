@@ -1,10 +1,10 @@
 <?php
 
-namespace Fruitcake\NotificationChannels\Gcm\Test;
+namespace NotificationChannels\Gcm\Tests;
 
 use NotificationChannels\Gcm\GcmMessage;
 
-class GcmMessageTest extends \PHPUnit_Framework_TestCase
+class GcmMessageTest extends TestCase
 {
     /** @var GcmMessage */
     protected $message;
@@ -24,7 +24,7 @@ class GcmMessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('myMessage', $message->message);
         $this->assertEquals('bar', $message->data['foo']);
         $this->assertEquals(GcmMessage::PRIORITY_HIGH, $message->priority);
-		$this->assertEquals(GcmMessage::DEFAULT_SOUND, $message->sound);
+        $this->assertEquals(GcmMessage::DEFAULT_SOUND, $message->sound);
     }
 
     /** @test */
@@ -35,7 +35,7 @@ class GcmMessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('myMessage', $message->message);
         $this->assertEquals('bar', $message->data['foo']);
         $this->assertEquals(GcmMessage::PRIORITY_HIGH, $message->priority);
-		$this->assertEquals(GcmMessage::DEFAULT_SOUND, $message->sound);
+        $this->assertEquals(GcmMessage::DEFAULT_SOUND, $message->sound);
     }
 
     /** @test */

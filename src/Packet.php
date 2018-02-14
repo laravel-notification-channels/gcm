@@ -36,7 +36,7 @@ class Packet extends Message
     {
         $json = [];
 
-        if ( ! empty($this->registrationIds)) {
+        if (! empty($this->registrationIds)) {
             $json['registration_ids'] = $this->registrationIds;
         }
 
@@ -44,23 +44,26 @@ class Packet extends Message
             $json['collapse_key'] = $this->collapseKey;
         }
 
-        if ( ! empty($this->data)) {
+        if (! empty($this->data)) {
             $json['data'] = $this->data;
         }
 
-        if ( ! empty($this->notification)) {
+        if (! empty($this->notification)) {
             $json['notification'] = $this->notification;
         }
 
         if ($this->delayWhileIdle) {
             $json['delay_while_idle'] = $this->delayWhileIdle;
         }
+
         if ($this->timeToLive != 2419200) {
             $json['time_to_live'] = $this->timeToLive;
         }
+
         if ($this->restrictedPackageName) {
             $json['restricted_package_name'] = $this->restrictedPackageName;
         }
+
         if ($this->dryRun) {
             $json['dry_run'] = $this->dryRun;
         }

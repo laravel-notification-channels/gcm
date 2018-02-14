@@ -2,9 +2,9 @@
 
 namespace NotificationChannels\Gcm;
 
-use Illuminate\Support\ServiceProvider;
 use Zend\Http\Client\Adapter\Curl;
 use ZendService\Google\Gcm\Client;
+use Illuminate\Support\ServiceProvider;
 
 class GcmServiceProvider extends ServiceProvider
 {

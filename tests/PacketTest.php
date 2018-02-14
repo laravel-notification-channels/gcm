@@ -1,16 +1,11 @@
 <?php
 
-namespace Fruitcake\NotificationChannels\Gcm\Test;
+namespace NotificationChannels\Gcm\Tests;
 
 use NotificationChannels\Gcm\Packet;
 
-class PacketTest extends \PHPUnit_Framework_TestCase
+class PacketTest extends TestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     /** @test */
     public function it_can_render_the_json_for_ios_and_android()
     {
