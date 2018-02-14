@@ -24,7 +24,7 @@ class GcmMessageTest extends TestCase
         $this->assertEquals('myMessage', $message->message);
         $this->assertEquals('bar', $message->data['foo']);
         $this->assertEquals(GcmMessage::PRIORITY_HIGH, $message->priority);
-		$this->assertEquals(GcmMessage::DEFAULT_SOUND, $message->sound);
+        $this->assertEquals(GcmMessage::DEFAULT_SOUND, $message->sound);
     }
 
     /** @test */
@@ -35,7 +35,7 @@ class GcmMessageTest extends TestCase
         $this->assertEquals('myMessage', $message->message);
         $this->assertEquals('bar', $message->data['foo']);
         $this->assertEquals(GcmMessage::PRIORITY_HIGH, $message->priority);
-		$this->assertEquals(GcmMessage::DEFAULT_SOUND, $message->sound);
+        $this->assertEquals(GcmMessage::DEFAULT_SOUND, $message->sound);
     }
 
     /** @test */

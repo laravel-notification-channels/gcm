@@ -39,7 +39,7 @@ class GcmMessage
     public $priority = self::PRIORITY_NORMAL;
 
     /**
-     * Notification sound
+     * Notification sound.
      *
      * @var string
      */
@@ -138,7 +138,7 @@ class GcmMessage
     }
 
     /**
-     * Set the sound for notification
+     * Set the sound for notification.
      *
      * @param string $sound
      *
