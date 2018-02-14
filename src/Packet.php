@@ -35,18 +35,23 @@ class Packet extends Message
     public function toJson()
     {
         $json = [];
-        if ($this->registrationIds) {
+
+        if ( ! empty($this->registrationIds)) {
             $json['registration_ids'] = $this->registrationIds;
         }
+
         if ($this->collapseKey) {
             $json['collapse_key'] = $this->collapseKey;
         }
-        if ($this->data) {
+
+        if ( ! empty($this->data)) {
             $json['data'] = $this->data;
         }
-        if ($this->notification) {
+
+        if ( ! empty($this->notification)) {
             $json['notification'] = $this->notification;
         }
+
         if ($this->delayWhileIdle) {
             $json['delay_while_idle'] = $this->delayWhileIdle;
         }
