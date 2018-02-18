@@ -2,8 +2,8 @@
 
 namespace NotificationChannels\Gcm;
 
-use ZendService\Google\Gcm\Message;
 use Zend\Json\Json;
+use ZendService\Google\Gcm\Message;
 
 class Packet extends Message
 {
@@ -15,10 +15,10 @@ class Packet extends Message
     /**
      * Set the notification.
      *
-     * @param array $ids
+     * @param array $notification
      * @return Message
      */
-    public function setNotification($notification)
+    public function setNotification(array $notification)
     {
         $this->notification = $notification;
 
@@ -35,27 +35,35 @@ class Packet extends Message
     public function toJson()
     {
         $json = [];
-        if ($this->registrationIds) {
+
+        if (! empty($this->registrationIds)) {
             $json['registration_ids'] = $this->registrationIds;
         }
+
         if ($this->collapseKey) {
             $json['collapse_key'] = $this->collapseKey;
         }
-        if ($this->data) {
+
+        if (! empty($this->data)) {
             $json['data'] = $this->data;
         }
-        if ($this->notification) {
+
+        if (! empty($this->notification)) {
             $json['notification'] = $this->notification;
         }
+
         if ($this->delayWhileIdle) {
             $json['delay_while_idle'] = $this->delayWhileIdle;
         }
+
         if ($this->timeToLive != 2419200) {
             $json['time_to_live'] = $this->timeToLive;
         }
+
         if ($this->restrictedPackageName) {
             $json['restricted_package_name'] = $this->restrictedPackageName;
         }
+
         if ($this->dryRun) {
             $json['dry_run'] = $this->dryRun;
         }

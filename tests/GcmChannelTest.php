@@ -1,17 +1,16 @@
 <?php
 
-namespace NotificationChannels\Gcm\Test;
+namespace NotificationChannels\Gcm\Tests;
 
+use Mockery;
 use Illuminate\Events\Dispatcher;
+use ZendService\Google\Gcm\Client;
 use Illuminate\Notifications\Notifiable;
 use NotificationChannels\Gcm\GcmChannel;
-use Illuminate\Notifications\Notification;
 use NotificationChannels\Gcm\GcmMessage;
-use PHPUnit_Framework_TestCase;
-use Mockery;
-use ZendService\Google\Gcm\Client;
+use Illuminate\Notifications\Notification;
 
-class ChannelTest extends PHPUnit_Framework_TestCase
+class ChannelTest extends TestCase
 {
     /**
      * @var Client
@@ -33,12 +32,6 @@ class ChannelTest extends PHPUnit_Framework_TestCase
         $this->channel = new GcmChannel($this->client, $this->events);
         $this->notification = new TestNotification;
         $this->notifiable = new TestNotifiable;
-    }
-
-    public function tearDown()
-    {
-        Mockery::close();
-        parent::tearDown();
     }
 
     /** @test */

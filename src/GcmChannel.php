@@ -4,10 +4,10 @@ namespace NotificationChannels\Gcm;
 
 use Exception;
 use Illuminate\Events\Dispatcher;
-use Illuminate\Notifications\Events\NotificationFailed;
+use ZendService\Google\Gcm\Client;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Gcm\Exceptions\SendingFailed;
-use ZendService\Google\Gcm\Client;
+use Illuminate\Notifications\Events\NotificationFailed;
 
 class GcmChannel
 {
@@ -39,7 +39,7 @@ class GcmChannel
     public function send($notifiable, Notification $notification)
     {
         $tokens = (array) $notifiable->routeNotificationFor('gcm');
-        if (! $tokens) {
+        if (empty($tokens)) {
             return;
         }
 
@@ -80,6 +80,7 @@ class GcmChannel
         $packet->setNotification([
                 'title' => $message->title,
                 'body' => $message->message,
+                'sound' => $message->sound,
             ]);
 
         return $packet;
@@ -100,7 +101,7 @@ class GcmChannel
             }
 
             $this->events->fire(
-                new NotificationFailed($notifiable, $notification, $this, [
+                new NotificationFailed($notifiable, $notification, get_class($this), [
                     'token' => $token,
                     'error' => $result['error'],
                 ])
