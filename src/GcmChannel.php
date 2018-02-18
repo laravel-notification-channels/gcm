@@ -81,7 +81,7 @@ class GcmChannel
                 'title' => $message->title,
                 'body' => $message->message,
                 'sound' => $message->sound,
-            ] + $message->data);
+            ]);
 
         return $packet;
     }
