@@ -17,9 +17,9 @@ This package is based on [ZendService\Google\Gcm](https://framework.zend.com/man
 ## Contents
 
 - [Installation](#installation)
-	- [Setting up the GCM service](#setting-up-the-:service_name-service)
+	- [Setting up the GCM service](#setting-up-the-gcm-service)
 - [Usage](#usage)
-	- [Available Message methods](#available-message-methods)
+	- [Available Message methods](#available-methods)
 - [Changelog](#changelog)
 - [Testing](#testing)
 - [Security](#security)
