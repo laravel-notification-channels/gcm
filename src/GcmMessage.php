@@ -53,6 +53,13 @@ class GcmMessage
     public $data = [];
 
     /**
+     * Additional notification data of the notification.
+     *
+     * @var array
+     */
+    public $notification = [];
+
+    /**
      * @param string|null $title
      * @param string|null $message
      * @param array $data
@@ -60,9 +67,9 @@ class GcmMessage
      *
      * @return static
      */
-    public static function create($title = null, $message = null, $data = [], $priority = self::PRIORITY_NORMAL, $sound = self::DEFAULT_SOUND)
+    public static function create($title = null, $message = null, $data = [], $notification = [], $priority = self::PRIORITY_NORMAL, $sound = self::DEFAULT_SOUND)
     {
-        return new static($title, $message, $data, $priority, $sound);
+        return new static($title, $message, $data, $notification, $priority, $sound);
     }
 
     /**
@@ -72,11 +79,12 @@ class GcmMessage
      * @param string $priority
      * @param string $sound
      */
-    public function __construct($title = null, $message = null, $data = [], $priority = self::PRIORITY_NORMAL, $sound = self::DEFAULT_SOUND)
+    public function __construct($title = null, $message = null, $data = [], $notification = [], $priority = self::PRIORITY_NORMAL, $sound = self::DEFAULT_SOUND)
     {
         $this->title = $title;
         $this->message = $message;
         $this->data = $data;
+        $this->notification = $notification;
         $this->priority = $priority;
         $this->sound = $sound;
     }
@@ -175,6 +183,34 @@ class GcmMessage
     public function setData($data)
     {
         $this->data = $data;
+
+        return $this;
+    }
+
+    /**
+     * Add notification data to the notification.
+     *
+     * @param string $key
+     * @param mixed $value
+     *
+     * @return $this
+     */
+    public function notification($key, $value)
+    {
+        $this->notification[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Override the notification data of the notification.
+     *
+     * @param array $notification
+     * @return $this
+     */
+    public function setNotification($notification)
+    {
+        $this->notification = $notification;
 
         return $this;
     }
