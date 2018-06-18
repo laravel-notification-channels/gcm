@@ -94,6 +94,7 @@ public function routeNotificationForGcm()
  - badge($integer)
  - priority(`GcmMessage::PRIORITY_NORMAL` or `GcmMessage::PRIORITY_HIGH`)
  - data($key, $mixed)
+ - notification($key, $mixed)
  - action($action, $params) (Will set an `action` data key)
 
 ## Changelog
