@@ -67,9 +67,9 @@ class GcmMessage
      *
      * @return static
      */
-    public static function create($title = null, $message = null, $data = [], $notification = [], $priority = self::PRIORITY_NORMAL, $sound = self::DEFAULT_SOUND)
+    public static function create($title = null, $message = null, $data = [], $priority = self::PRIORITY_NORMAL, $sound = self::DEFAULT_SOUND, $notification = [])
     {
-        return new static($title, $message, $data, $notification, $priority, $sound);
+        return new static($title, $message, $data, $priority, $sound, $notification);
     }
 
     /**
@@ -79,14 +79,14 @@ class GcmMessage
      * @param string $priority
      * @param string $sound
      */
-    public function __construct($title = null, $message = null, $data = [], $notification = [], $priority = self::PRIORITY_NORMAL, $sound = self::DEFAULT_SOUND)
+    public function __construct($title = null, $message = null, $data = [], $priority = self::PRIORITY_NORMAL, $sound = self::DEFAULT_SOUND, $notification = [])
     {
         $this->title = $title;
         $this->message = $message;
         $this->data = $data;
-        $this->notification = $notification;
         $this->priority = $priority;
         $this->sound = $sound;
+        $this->notification = $notification;
     }
 
     /**
