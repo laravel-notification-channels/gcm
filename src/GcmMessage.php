@@ -68,11 +68,12 @@ class GcmMessage
     public $notification = [];
 
     /**
+     * Create a new message instance.
+     *
      * @param string|null $title
      * @param string|null $message
      * @param array $data
      * @param string $priority
-     *
      * @return static
      */
     public static function create($title = null, $message = null, $data = [], $priority = self::PRIORITY_NORMAL, $sound = self::DEFAULT_SOUND, $notification = [])
@@ -81,6 +82,8 @@ class GcmMessage
     }
 
     /**
+     * Create a new message instance.
+     *
      * @param string|null $title
      * @param string|null $message
      * @param array $data
@@ -101,7 +104,6 @@ class GcmMessage
      * Set the title of the notification.
      *
      * @param string $title
-     *
      * @return $this
      */
     public function title($title)
@@ -115,7 +117,6 @@ class GcmMessage
      * Set the message of the notification.
      *
      * @param string $message
-     *
      * @return $this
      */
     public function message($message)
@@ -129,7 +130,6 @@ class GcmMessage
      * Set the priority of the notification.
      *
      * @param string $priority
-     *
      * @return $this
      */
     public function priority($priority)
@@ -143,7 +143,6 @@ class GcmMessage
      * Set the sound for notification.
      *
      * @param string $sound
-     *
      * @return $this
      */
     public function sound($sound)
@@ -158,7 +157,6 @@ class GcmMessage
      *
      * @param string $key
      * @param mixed $value
-     *
      * @return $this
      */
     public function data($key, $value)
@@ -186,7 +184,6 @@ class GcmMessage
      *
      * @param string $key
      * @param mixed $value
-     *
      * @return $this
      */
     public function notification($key, $value)
@@ -214,7 +211,6 @@ class GcmMessage
      *
      * @param string $action
      * @param mixed $params
-     *
      * @return $this
      */
     public function action($action, $params = null)

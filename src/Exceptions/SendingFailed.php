@@ -7,9 +7,8 @@ use Exception;
 class SendingFailed extends Exception
 {
     /**
-     * @param Exception $exception
-     *
-     * @return SendingFailed
+     * @param \Exception $exception
+     * @return \NotificationChannels\Gcm\ExceptionsSendingFailed
      */
     public static function create(Exception $exception)
     {

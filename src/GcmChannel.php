@@ -11,15 +11,25 @@ use Illuminate\Notifications\Events\NotificationFailed;
 
 class GcmChannel
 {
-    /** @var Client */
+    /**
+     * The GCM client instance.
+     *
+     * @var \ZendService\Google\Gcm\Client
+     */
     protected $client;
 
-    /** @var Dispatcher */
+    /**
+     * The event dispatcher instance.
+     *
+     * @var \Illuminate\Events\Dispatcher
+     */
     protected $events;
 
     /**
-     * @param Client $client
-     * @param Dispatcher $events
+     * Create a new channel instance.
+     *
+     * @param \ZendService\Google\Gcm\Client $client
+     * @param \Illuminate\Events\Dispatcher $events
      */
     public function __construct(Client $client, Dispatcher $events)
     {
@@ -33,7 +43,6 @@ class GcmChannel
      * @param mixed $notifiable
      * @param Notification $notification
      * @return void
-     *
      * @throws Exceptions\SendingFailed
      */
     public function send($notifiable, Notification $notification)
@@ -64,7 +73,6 @@ class GcmChannel
     /**
      * @param $tokens
      * @param $message
-     *
      * @return \NotificationChannels\Gcm\Packet
      */
     protected function getPacket($tokens, $message)
@@ -87,7 +95,9 @@ class GcmChannel
     }
 
     /**
-     * @param $notifiable
+     * Handle a failed notification.
+     *
+     * @param mixed $notifiable
      * @param \Illuminate\Notifications\Notification $notification
      * @param $response
      */
