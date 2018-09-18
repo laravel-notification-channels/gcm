@@ -40,14 +40,6 @@ class GcmMessage
     public $message;
 
     /**
-     * The badge of the notification.
-     * @warning UNUSED
-     *
-     * @var int
-     */
-    public $badge;
-
-    /**
      * The priority of the notification.
      *
      * @var string
@@ -129,20 +121,6 @@ class GcmMessage
     public function message($message)
     {
         $this->message = $message;
-
-        return $this;
-    }
-
-    /**
-     * Set the badge of the notification.
-     *
-     * @param int $badge
-     *
-     * @return $this
-     */
-    public function badge($badge)
-    {
-        $this->badge = $badge;
 
         return $this;
     }
