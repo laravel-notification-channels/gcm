@@ -60,6 +60,13 @@ class GcmMessageTest extends TestCase
     }
 
     /** @test */
+    public function it_can_set_notification()
+    {
+        $this->message->notification('foo', 'bar');
+        $this->assertEquals('bar', $this->message->notification['foo']);
+    }
+
+    /** @test */
     public function it_has_default_priority()
     {
         $this->assertEquals(GcmMessage::PRIORITY_NORMAL, $this->message->priority);
