@@ -4,9 +4,25 @@ namespace NotificationChannels\Gcm;
 
 class GcmMessage
 {
+    /**
+     * Normal priority option.
+     *
+     * @var string
+     */
     const PRIORITY_NORMAL = 'normal';
+
+    /**
+     * High priority option.
+     *
+     * @var string
+     */
     const PRIORITY_HIGH = 'high';
 
+    /**
+     * Default sound option.
+     *
+     * @var string
+     */
     const DEFAULT_SOUND = 'default';
 
     /**
