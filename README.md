@@ -71,7 +71,6 @@ class AccountApproved extends Notification
     public function toGcm($notifiable)
     {
         return GcmMessage::create()
-            ->badge(1)
             ->title('Account approved')
             ->message("Your {$notifiable->service} account was approved!");
     }
@@ -91,7 +90,6 @@ public function routeNotificationForGcm()
 
  - title($str)
  - message($str)
- - badge($integer)
  - priority(`GcmMessage::PRIORITY_NORMAL` or `GcmMessage::PRIORITY_HIGH`)
  - data($key, $mixed)
  - notification($key, $mixed)
