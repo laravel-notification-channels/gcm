@@ -9,7 +9,7 @@ class GcmMessageTest extends TestCase
     /** @var GcmMessage */
     protected $message;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

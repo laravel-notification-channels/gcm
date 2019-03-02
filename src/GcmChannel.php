@@ -110,7 +110,7 @@ class GcmChannel
                 continue;
             }
 
-            $this->events->fire(
+            $this->events->dispatch(
                 new NotificationFailed($notifiable, $notification, get_class($this), [
                     'token' => $token,
                     'error' => $result['error'],
