@@ -13,6 +13,7 @@ This package makes it easy to send notifications using Google Cloud Messaging (G
 
 This package is based on [ZendService\Google\Gcm](https://framework.zend.com/manual/2.4/en/modules/zendservice.google.gcm.html), so please read that documentation for more information.
 
+**Google has deprecated/discontinued GCM as of April 11, 2019. As such, this package is also considered deprecated.**
 
 ## Contents
 
