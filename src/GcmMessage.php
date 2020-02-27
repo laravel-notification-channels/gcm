@@ -33,6 +33,13 @@ class GcmMessage
     public $title;
 
     /**
+     * The icon of the notification.
+     *
+     * @var string
+     */
+    public $icon;
+
+    /**
      * The message of the notification.
      *
      * @var string
@@ -109,6 +116,19 @@ class GcmMessage
     public function title($title)
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Set the title of the notification.
+     *
+     * @param string $title
+     * @return $this
+     */
+    public function icon($icon)
+    {
+        $this->icon = $icon;
 
         return $this;
     }

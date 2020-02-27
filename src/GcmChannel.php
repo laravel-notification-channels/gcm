@@ -89,6 +89,7 @@ class GcmChannel
                 'title' => $message->title,
                 'body' => $message->message,
                 'sound' => $message->sound,
+                'icon' => $message->icon,
             ] + $message->notification);
 
         return $packet;
